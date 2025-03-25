@@ -1,5 +1,10 @@
 package com.marcosferrandiz.EjercicioMatriculas;
 
+import com.marcosferrandiz.exceptions.InvalidPlateLengthException;
+import com.marcosferrandiz.exceptions.InvalidPlateLettersException;
+import com.marcosferrandiz.exceptions.InvalidPlateNumberException;
+import com.marcosferrandiz.exceptions.MatriculaInvalidaException;
+
 import java.util.Scanner;
 
 public class PrimerEjercicioMatriculas {
@@ -7,8 +12,18 @@ public class PrimerEjercicioMatriculas {
 
 
     public static void main(String[] args) {
-        String matricula = solicitarMatricula();
-        System.out.println(matricula);
+        String matricula = leerString("Introduzca la matricula con un espacio entre los numeros y las letras",8,8);
+        try {
+            validarMatricula(matricula);
+        }catch (MatriculaInvalidaException mie){
+            System.out.println(mie);
+        } catch (InvalidPlateLengthException e) {
+            System.out.println(e);
+        } catch (InvalidPlateLettersException e) {
+            System.out.println(e);
+        } catch (InvalidPlateNumberException e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -16,8 +31,8 @@ public class PrimerEjercicioMatriculas {
      * @return Devuelve la matricula, de forma valida
      * @throws MatriculaInvalidaException Excepción en el caso de que ponga mal la matricula
      */
-    public static String solicitarMatricula() throws MatriculaInvalidaException{
-        String matricula = leerString("Introduzca la matricula con un espacio entre los numeros y las letras",0,8);
+    public static String solicitarMatricula() throws MatriculaInvalidaException, InvalidPlateLettersException, InvalidPlateNumberException, InvalidPlateLengthException {
+        String matricula = leerString("Introduzca la matricula con un espacio entre los numeros y las letras",8,8);
         if (validarMatricula(matricula)){
             return matricula;
         }
@@ -52,24 +67,30 @@ public class PrimerEjercicioMatriculas {
      * @param matricula La matricula que queremos validar
      * @return Devuelve true si cumple todos los requisitos y false si no los cumple
      */
-    public static boolean validarMatricula(String matricula) {
+    public static boolean validarMatricula(String matricula) throws InvalidPlateLengthException, InvalidPlateNumberException, InvalidPlateLettersException, MatriculaInvalidaException {
         int i;
         if (matricula.length() != 8) {
-            return false;
+            throw new InvalidPlateLengthException("La matricula debe teer 8 caracteres");
         }
         for (i = 0; i < 4; i++) {
             if (!Character.isDigit(matricula.charAt(i))) {
-                return false;
+                throw new InvalidPlateNumberException("La matricula debe de tener 4 numeros");
             }
         }
         if (!Character.isWhitespace(matricula.charAt(i++))) {
-            return false;
+            throw new MatriculaInvalidaException("La matricula debe de tener 1 espacio entre los numeros y caracter");
         }
         for (int j = i; j < matricula.length(); j++) {
             if (!Character.isLetter(matricula.charAt(j))) {
-                return false;
+                throw new InvalidPlateLettersException("La matricula debe de tener 3 letras");
             }
         }
         return true;
+    }
+
+    public static void parsearMatricula(String matricula) throws MatriculaInvalidaException, InvalidPlateLettersException, InvalidPlateNumberException, InvalidPlateLengthException {
+        if (!validarMatricula(matricula)){
+            throw new MatriculaInvalidaException("La matricula no es valida");
+        }
     }
 }
