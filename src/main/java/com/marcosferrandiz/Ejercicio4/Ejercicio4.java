@@ -26,7 +26,7 @@ public class Ejercicio4 {
             return;
         }
         System.out.println("Introduce números enteros:");
-        for (int i = 0; i < array.length ; i++) {
+        for (int i = 0; i <= array.length ; i++) {
             try {
                 int numero = scanner.nextInt();
                 array[i] = numero;
