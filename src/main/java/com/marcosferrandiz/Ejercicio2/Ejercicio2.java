@@ -7,9 +7,15 @@ import java.util.Scanner;
 public class Ejercicio2 {
     private static final Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        double numeroGrande = solicitarNumeros("Introduzca 10 numeros");
+        double numeroGrande = solicitarNumeros("Introduzca 10 números");
         System.out.println("El numero mas grande es "+ numeroGrande);
     }
+
+    /**
+     * Solicita 10 numeros, en el acaso de que pongas letra se te volverá a solicitar un número, al final del metodo mostrar la cantidad de veces que salio la excepción, y en el
+     * @param mensaje Es el mensaje de las cosas que quieres solicitar, en este caso indicar al usuario que debe de introducir 10 números
+     * @return Devuelve el número double mas grande introducido
+     */
     public static double solicitarNumeros(String mensaje){
         double[] numeroIntroducidos = new double[10];
         double num = 0;

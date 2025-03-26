@@ -12,6 +12,9 @@ public class Ejercicio3 {
         solicitarNumero();
     }
 
+    /**
+     * Metodo que solicita un numero ,en el caso de que sea espacio pondrá un mensaje de error por la excepcion, y en el caso de que introduzca una letra dejara de poner numeros en eel array, muestra el número mas grande del array
+     */
     public static void solicitarNumero() {
         try {
             double num;

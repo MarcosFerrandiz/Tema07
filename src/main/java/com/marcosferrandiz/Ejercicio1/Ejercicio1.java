@@ -15,7 +15,9 @@ public class Ejercicio1 {
     }
 
 
-
+    /**
+     * Solicita un numero y los va metiendo hasta que ponga una letra, cuando ponga una letra dejará de meter numeros y mostrará el resultado como un array
+     */
     public static void solicitarNumero(){
         StringBuilder sb = new StringBuilder();
         double num = 0;
